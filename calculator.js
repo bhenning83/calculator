@@ -12,9 +12,16 @@ operate = (a,b,c) => {
 
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
+let buttonClicks = []
 buttons.forEach(button => {
     button.addEventListener('click', function (e) {
-    e.display.textContent = 'test';
+    buttonClicks.push(e.target.value)
+    let screen = buttonClicks.join('')
+    console.log(buttonClicks)
+    console.log(screen)
+    display.textContent = `${screen}`
 })
 });
 
+
+//make variable an array, and assign clicks to the indexes of array
