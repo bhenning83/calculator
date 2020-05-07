@@ -10,7 +10,11 @@ operate = (a,b,c) => {
     if (b == '/') return divide(a, c);
 }
 
-const button = document.querySelector('.button');
-for (let i = 0; i < button.length; i++) {
-	button[i].style.backgroundColor = blue;
-}
+const display = document.querySelector('#display');
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', function (e) {
+    e.display.textContent = 'test';
+})
+});
+
