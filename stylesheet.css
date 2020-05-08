@@ -368,10 +368,10 @@
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
     'display display display display'
-    'one two three add'
+    'one two three clear'
     'four five six sub'
     'seven eight nine div'
-    'mult zero clear equals';
+    'mult zero add equals';
   }
   #footer {
     position: absolute;
