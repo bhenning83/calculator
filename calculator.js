@@ -13,19 +13,26 @@ const operate = (a,b,c) => {
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
 const clear = document.querySelector('#clear');
+const operator = document.querySelectorAll('.operator')
+const equals = document.querySelector('#equals')
 let buttonClicks = []
 buttons.forEach(button => {
     button.addEventListener('click', function (e) {
-        if (e.target.value !== 'C') {
+    if (e.target.value !== 'C') {
     buttonClicks.push(e.target.value)
     let screen = buttonClicks.join('')
     display.textContent = `${screen}`
-    console.log(buttonClicks)
-    console.log(screen)
     } else {
         buttonClicks.length = 0;
         display.textContent = '';
     }
+    console.log(buttonClicks)
 })
 });
+operator.forEach(x => {
+    x.addEventListener('click', function (e) {
+        e.target.style.backgroundColor = 'blue';
+    })
+})
+equals.addEventListener('click', (e) => e.target.style.backgroundColor = 'red')
 
