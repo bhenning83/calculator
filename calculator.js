@@ -12,27 +12,44 @@ const operate = (a,b,c) => {
 
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
-const clear = document.querySelector('#clear');
-const operator = document.querySelectorAll('.operator')
-const equals = document.querySelector('#equals')
-let buttonClicks = []
+let args1 = '';
+let args2 = '';
+let firstOp = '';
+let workingArray = []
 buttons.forEach(button => {
     button.addEventListener('click', function (e) {
-    if (e.target.value !== 'C') {
-    buttonClicks.push(e.target.value)
-    let screen = buttonClicks.join('')
-    display.textContent = `${screen}`
-    } else {
-        buttonClicks.length = 0;
-        display.textContent = '';
+    let pick = e.target.value;
+    let targetClass = e.target.getAttribute('class')
+    if (pick == 'C') {
+        return clear()
+    } else if (targetClass == 'number button') {
+        workingArray.push(pick)
+        let screen = workingArray.join('')
+        display.textContent = `${screen}`;
+        console.log(workingArray);
+    } else if (targetClass == 'operator button') {
+        args1 = workingArray.slice(0, this.index).join('')
+        firstOp = this.value;
+        display.textContent = pick
+        workingArray = [];
+    } else if (pick == '=') {
+        if (args1 == '') return;
+        a = Number(args1);
+        b = firstOp;
+        c = Number(workingArray.slice(0, this.index).join(''));
+        console.log(a)
+        console.log(b)
+        console.log(c)
+        let result = operate(a,b,c);
+        display.textContent = result;
     }
-    console.log(buttonClicks)
-})
 });
-operator.forEach(x => {
-    x.addEventListener('click', function (e) {
-        e.target.style.backgroundColor = 'blue';
-    })
-})
-equals.addEventListener('click', (e) => e.target.style.backgroundColor = 'red')
+});
+function clear() {
+    workingArray.length = 0;
+    display.textContent = '';
+}
 
+
+
+//once operator is pressed, set the array to Args1. if operator is pressed again, args 2 becomes args 1. 
