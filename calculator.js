@@ -49,12 +49,17 @@ buttons.forEach(button => {
             workingArray = []
             firstOp = this.value //assigns the operator for next operation. 
             } 
-        if (opCount == 1) {
+        if (opCount == 1 && args1 == []) { //checks if there is an args1 assigned from equals button being hit previously
             args1 = workingArray.slice(0, this.index).join('')
+            console.log(args1)
             workingArray = [];
             firstOp = this.value;
             display.textContent = pick
+        } else if (opCount == 1) {
             console.log(args1)
+            workingArray = [];
+            firstOp = this.value;
+            display.textContent = pick
         }
     } else if (pick == '=') {
         if (args1 == '') return;
@@ -63,7 +68,9 @@ buttons.forEach(button => {
         c = Number(workingArray.slice(0, this.index).join(''));
         args1 = operate(a,b,c);
         display.textContent = args1;
-        longArray = [];
+        longArray = []
+        console.log(args1)
+        console.log(workingArray)
     } 
 });
 });
@@ -72,7 +79,7 @@ function clear() {
     display.textContent = '';
     longArray.length = 0;
 }
-
+console.log(longArray)
 
     
 
