@@ -388,6 +388,10 @@
       align-self: center;
       justify-self: center;
   }
+  button:hover {
+    background-color: gray;
+    border: 1px solid gray;
+  }
 #num0 {
     grid-area: zero;
 }
