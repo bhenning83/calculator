@@ -17,9 +17,9 @@ buttons.forEach(button => {
     if (targetClass == 'number button') {
         workingArray.push(pick)
         longArray.push(pick)
-        changeClear();
         let screen = workingArray.join('')
         display.textContent = `${screen}`;
+        changeClear();
         if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
             args1 = '';
             eqCheck = false;
@@ -64,6 +64,7 @@ buttons.forEach(button => {
         display.textContent = args1;
         longArray = [];
         workingArray = [];
+        clearButton.textContent = 'AC'
     } 
 });
 });
@@ -80,9 +81,7 @@ function clear() {
     clearButton.textContent = 'AC';
 }
 function changeClear() {
-    if (longArray !== []) {
     clearButton.textContent = 'C';
-    }
 }
 const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
