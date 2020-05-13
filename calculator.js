@@ -96,5 +96,4 @@ function clear() {
 
     
 
-    //use a temporary variable to store arg1 after = ?
-    //= assings a variable test. if number is pressed and test is true, set args1 to '' and turn test off. 
+    //need to add a decimal input button. hover states for buttons. CE button. Second display for current operation. Key listeners. allow 2+2-3*7. 
