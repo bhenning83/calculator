@@ -26,6 +26,7 @@ const operate = (a,b,c) => {
     if (b == '/') return divide(a, c);
 }
 function clear() {
+    changeOp()
     if (workingArray == []) {
     args1 = '';
     workingArray = [];
@@ -37,14 +38,15 @@ function clear() {
     display.textContent = '';  
     }
     clearButton.textContent = 'AC';
-    changeOp()
 }
 function changeClear() {
     clearButton.textContent = 'C';
 }
 function changeOp() {
     ops.forEach(op => {
-        op.style.backgroundColor = 'white'
+        op.style.backgroundColor = 'white';
+        op.style.color = 'black';
+        op.style.borderColor = 'white';
     });
 }
 clearButton.addEventListener('click', function (e) {
@@ -65,7 +67,9 @@ numbers.forEach(number => {
 });  
 ops.forEach(op => {
     op.addEventListener('click', function (o) {
-        this.style.backgroundColor = 'blue'
+        this.style.backgroundColor = '#737373'
+        this.style.borderColor = '#737373'
+        this.style.color = 'white'
         longArray.push(this.value)
         eqCheck = false;
         changeClear()
@@ -112,6 +116,5 @@ equals.addEventListener('click', function (p) {
     // AC isn't working after = --- it's retaining the Args1 value.
 
     // need to add a decimal input button. CE button. Second display for current operation. Key listeners. allow 2+2-3*7. 
-    // highlight operator when clicked, don't show it in display. Unhighlight it when number is clicked.
 
    
