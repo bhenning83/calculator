@@ -387,9 +387,9 @@
       font-size: 33px;
       align-self: center;
       justify-self: center;
+      border: 1px solid white;
   }
   button:hover {
-    background-color: gray;
     border: 1px solid gray;
   }
 #num0 {
