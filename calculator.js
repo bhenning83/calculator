@@ -9,22 +9,6 @@ let firstOp = '';
 let workingArray = []
 let longArray = []
 let eqCheck = '';
-function clear() {
-    if (workingArray == []) {
-    args1 = '';
-    workingArray = [];
-    display.textContent = '';
-    longArray = [];
-    }  
-    if (workingArray !== []) {
-    workingArray = [];
-    display.textContent = '';  
-    }
-    clearButton.textContent = 'AC';
-}
-function changeClear() {
-    clearButton.textContent = 'C';
-}
 const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a * b;
@@ -41,6 +25,28 @@ const operate = (a,b,c) => {
     if (b == '*') return multiply(a, c);
     if (b == '/') return divide(a, c);
 }
+function clear() {
+    if (workingArray == []) {
+    args1 = '';
+    workingArray = [];
+    display.textContent = '';
+    longArray = [];
+    }  
+    if (workingArray !== []) {
+    workingArray = [];
+    display.textContent = '';  
+    }
+    clearButton.textContent = 'AC';
+    changeOp()
+}
+function changeClear() {
+    clearButton.textContent = 'C';
+}
+function changeOp() {
+    ops.forEach(op => {
+        op.style.backgroundColor = 'white'
+    });
+}
 clearButton.addEventListener('click', function (e) {
     return clear()
 }) 
@@ -50,6 +56,7 @@ numbers.forEach(number => {
         longArray.push(this.value);
         display.textContent = workingArray.join('')
         changeClear();
+        changeOp();
         if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
             args1 = '';
             eqCheck = false;
@@ -58,6 +65,7 @@ numbers.forEach(number => {
 });  
 ops.forEach(op => {
     op.addEventListener('click', function (o) {
+        this.style.backgroundColor = 'blue'
         longArray.push(this.value)
         eqCheck = false;
         changeClear()
@@ -97,12 +105,8 @@ equals.addEventListener('click', function (p) {
     longArray = [];
     workingArray = [];
     clearButton.textContent = 'AC'
+    changeOp();
 })
-ops.forEach(op => {
-    op.addEventListener('mousedown', function (r) {
-        this.style.backgroundColor = '#feffc4';
-    })
-});
 
 
     // AC isn't working after = --- it's retaining the Args1 value.
