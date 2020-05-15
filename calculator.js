@@ -13,7 +13,7 @@ const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a * b;
 function divide(a,b) {
-    if (b == 0) {
+    if (c === 0) {
         return 'Nice try, smartass'
     } else {
         return a / b;
@@ -27,31 +27,27 @@ const operate = (a,b,c) => {
 }
 function clear() {
     changeOp()
+    clearButton.textContent = 'AC';
     if (workingArray == []) {
-    args1 = '';
     workingArray = [];
     display.textContent = '';
     longArray = [];
-    }  
-    if (workingArray !== []) {
+    args1 = '';
+    } else if (workingArray !== []) {
     workingArray = [];
     display.textContent = '';  
     }
-    clearButton.textContent = 'AC';
 }
 function changeClear() {
     clearButton.textContent = 'C';
 }
 function changeOp() {
     ops.forEach(op => {
-        op.style.backgroundColor = 'white';
+        op.style.backgroundColor = 'rgba(255, 255, 255, 0.644)';
         op.style.color = 'black';
-        op.style.borderColor = 'white';
+        op.style.borderColor = 'rgba(140, 251, 255, 0.658)';
     });
 }
-clearButton.addEventListener('click', function (e) {
-    return clear()
-}) 
 numbers.forEach(number => {
     number.addEventListener('click', function (y) {
         workingArray.push(this.value)
@@ -111,6 +107,7 @@ equals.addEventListener('click', function (p) {
     clearButton.textContent = 'AC'
     changeOp();
 })
+clearButton.addEventListener('click', clear); 
 
 
     // AC isn't working after = --- it's retaining the Args1 value.
