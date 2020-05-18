@@ -457,6 +457,7 @@
     grid-area: clear;
     width: 170px;
     border-radius: 15px;
+    background-color: rgba(199, 199, 199, 0.644);
 }
 #dec {
   grid-area: dec;
