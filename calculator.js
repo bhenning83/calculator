@@ -62,8 +62,8 @@ function switchPositive() {
         args1 = args1 * -1;
         display.textContent = `${args1}`
     } else if (workingArray.length == 0 && eqCheck == false) {
-        workingArray.push('-');
-        display.textContent = workingArray.join('')
+        //workingArray.push('-');
+       // display.textContent = '-';
     } else if (workingArray[0] > 0) {
         workingArray.push('-');  //display comes in ltr, so this puts the '-' at the start.
         display.textContent = workingArray.join('');
@@ -148,8 +148,7 @@ clearButton.addEventListener('click', clear);
 switcher.addEventListener('click', switchPositive)
 
 
-    // AC isn't working after = --- it's retaining the Args1 value.
 
     //  CE button. Second display for current operation. Key listeners. allow 2+2-3*7. text goes off display
 
-   
+   //write a display function that moves - to back of array if it's in front
