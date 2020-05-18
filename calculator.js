@@ -10,6 +10,8 @@ let firstOp = '';
 let workingArray = []
 let longArray = []
 let eqCheck = '';
+let tempString = '';
+let tempArray = [];
 const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a * b;
@@ -48,6 +50,37 @@ function changeOp() {
         op.style.color = 'black';
         op.style.borderColor = 'rgba(140, 251, 255, 0.658)';
     });
+}
+function switchPositive() {
+    if (workingArray.length == 0 && args1 > 0) {
+        tempString = String(args1);
+        tempArray = tempString.split('');
+        tempArray.push('-');
+        display.textContent = tempArray.join('')
+        args1 = args1 * -1;
+    } else if (workingArray.length == 0 && args1 < 0) {
+        args1 = args1 * -1;
+        display.textContent = `${args1}`
+    } else if (workingArray[0] > 0) {
+        workingArray.push('-');  //display comes in ltr, so this puts the '-' at the start.
+        display.textContent = workingArray.join('');
+        workingArray.pop();
+        workingArray.unshift('-')
+    } else {
+        workingArray.shift();
+        display.textContent = workingArray.join('');
+    }
+}
+function displayResult() {
+    if (args1 < 0) {
+        tempString = String(args1);
+        tempArray = tempString.split('')
+        tempArray.shift()
+        tempArray.push('-')
+        display.textContent = tempArray.join('');
+    } else {
+        display.textContent = args1;
+    } 
 }
 numbers.forEach(number => {
     number.addEventListener('click', function (y) {
@@ -90,9 +123,9 @@ ops.forEach(op => {
             b = firstOp;
             c = Number(workingArray.slice(0, this.index).join(''));
             args1 = operate(a,b,c);
-            display.textContent = args1;
             firstOp = this.value // assigns the operator for next operation. 
             workingArray = [];
+            displayResult();
             } 
     })
 })
@@ -102,17 +135,18 @@ equals.addEventListener('click', function (p) {
     c = Number(workingArray.slice(0, this.index).join(''));
     args1 = operate(a,b,c);
     eqCheck = true; 
-    display.textContent = args1;
     longArray = [];
     workingArray = [];
     clearButton.textContent = 'AC'
     changeOp();
+    displayResult()
 })
 clearButton.addEventListener('click', clear); 
+switcher.addEventListener('click', switchPositive)
 
 
     // AC isn't working after = --- it's retaining the Args1 value.
 
-    // need to add a decimal input button. CE button. Second display for current operation. Key listeners. allow 2+2-3*7. 
+    //  CE button. Second display for current operation. Key listeners. allow 2+2-3*7. text goes off display
 
    
