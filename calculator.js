@@ -9,7 +9,7 @@ let args1 = '';
 let firstOp = '';
 let workingArray = []
 let longArray = []
-let eqCheck = '';
+let eqCheck = false;
 let tempString = '';
 let tempArray = [];
 const add = (a,b) => a + b;
@@ -31,12 +31,12 @@ const operate = (a,b,c) => {
 function clear() {
     changeOp()
     clearButton.textContent = 'AC';
-    if (workingArray == []) {
+    if (workingArray.length == 0) {
     workingArray = [];
     display.textContent = '';
     longArray = [];
     args1 = '';
-    } else if (workingArray !== []) {
+    } else if (workingArray.length !== 0) {
     workingArray = [];
     display.textContent = '';  
     }
@@ -52,15 +52,18 @@ function changeOp() {
     });
 }
 function switchPositive() {
-    if (workingArray.length == 0 && args1 > 0) {
+    if (workingArray.length == 0 && eqCheck == true && args1 > 0) {
         tempString = String(args1);
         tempArray = tempString.split('');
         tempArray.push('-');
         display.textContent = tempArray.join('')
         args1 = args1 * -1;
-    } else if (workingArray.length == 0 && args1 < 0) {
+    } else if (workingArray.length == 0 && eqCheck == true && args1 < 0) {
         args1 = args1 * -1;
         display.textContent = `${args1}`
+    } else if (workingArray.length == 0 && eqCheck == false) {
+        workingArray.push('-');
+        display.textContent = workingArray.join('')
     } else if (workingArray[0] > 0) {
         workingArray.push('-');  //display comes in ltr, so this puts the '-' at the start.
         display.textContent = workingArray.join('');
