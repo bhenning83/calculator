@@ -4,6 +4,7 @@ const clearButton = document.querySelector('#clear');
 const ops = document.querySelectorAll('.operator');
 const numbers = document.querySelectorAll('.number');
 const equals = document.querySelector('#equals');
+const switcher = document.querySelector('#switch');
 let args1 = '';
 let firstOp = '';
 let workingArray = []

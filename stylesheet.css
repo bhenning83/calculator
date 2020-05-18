@@ -377,13 +377,14 @@
     box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.589);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
     'display display display display'
-    'one two three clear'
-    'four five six sub'
-    'seven eight nine div'
-    'mult zero add equals';
+    'clear clear div sub'
+    'one two three mult'
+    'four five six  add'
+    'seven eight nine switch'
+    'dec zero equals equals';
   }
   #footer {
     position: absolute;
@@ -449,10 +450,19 @@
 }
 #equals {
     grid-area: equals;
-    
+    width: 170px;
+    border-radius: 15px;
 }
 #clear {
     grid-area: clear;
+    width: 170px;
+    border-radius: 15px;
+}
+#dec {
+  grid-area: dec;
+}
+#switch {
+  grid-area: switch;
 }
 #display {
     grid-area: display;
@@ -465,5 +475,6 @@
     height: 33px;
     padding-top: 20px;
     padding-bottom: 30px;
-    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    direction: rtl
 }
