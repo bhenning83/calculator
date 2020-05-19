@@ -1,5 +1,4 @@
 const display = document.querySelector('#display');
-const buttons = document.querySelectorAll('.button');
 const clearButton = document.querySelector('#clear');
 const ops = document.querySelectorAll('.operator');
 const numbers = document.querySelectorAll('.number');
@@ -17,7 +16,7 @@ const subtract = (a,b) => a - b;
 const multiply = (a,b) => a * b;
 function divide(a,b) {
     if (c === 0) {
-        return 'Nice try, smartass'
+        return 'Don\'t do that'
     } else {
         return a / b;
     }
@@ -64,8 +63,8 @@ function switchPositive() {
     } else if (workingArray.length == 0 && eqCheck == false) {
         workingArray.push('-');
         display.textContent = workingArray.join('')
-    } else if (workingArray[0] > 0) {
-        workingArray.push('-');  //display comes in ltr, so this puts the '-' at the start.
+    } else if (workingArray[0] > 0) { //display comes in ltr, so this puts the '-' at the start.
+        workingArray.push('-');  
         display.textContent = workingArray.join('');
         workingArray.pop();
         workingArray.unshift('-')
@@ -93,8 +92,16 @@ function displayArray() {
         tempArray.shift()
         tempArray.push('-')
         display.textContent = tempArray.join('');
-    }
+    } 
 }
+function displayDecimal() {
+    tempArray = [...workingArray];
+    tempArray.pop()
+    tempArray.unshift('.')
+    display.textContent = tempArray.join('');
+    }
+clearButton.addEventListener('click', clear); 
+switcher.addEventListener('click', switchPositive)
 numbers.forEach(number => {
     number.addEventListener('click', function (y) {
         workingArray.push(this.value)
@@ -105,6 +112,10 @@ numbers.forEach(number => {
         if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
             args1 = '';
             eqCheck = false;
+        }
+        if (y.target.value == '.') {
+            console.log('hello')
+            displayDecimal();
         }
     });
 });  
@@ -154,8 +165,7 @@ equals.addEventListener('click', function (p) {
     changeOp();
     displayResult()
 })
-clearButton.addEventListener('click', clear); 
-switcher.addEventListener('click', switchPositive)
+
 
 
 
