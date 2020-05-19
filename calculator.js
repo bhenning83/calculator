@@ -93,6 +93,9 @@ function displayArray() {
         tempArray.push('-')
         display.textContent = tempArray.join('');
     } 
+    if (workingArray.length > 17) {
+        workingArray = workingArray.slice(0,17)
+    }
 }
 function displayDecimal() {
     tempArray = [...workingArray];
@@ -146,7 +149,8 @@ ops.forEach(op => {
             a = Number(args1);
             b = firstOp;
             c = Number(workingArray.slice(0, this.index).join(''));
-            args1 = operate(a,b,c);
+            args1 = operate(a,b,c)
+            args1.toFixed(3);
             firstOp = this.value // assigns the operator for next operation. 
             workingArray = [];
             displayResult();
@@ -158,6 +162,7 @@ equals.addEventListener('click', function (p) {
     b = firstOp;
     c = Number(workingArray.slice(0, this.index).join(''));
     args1 = operate(a,b,c);
+    args1.toFixed(3);
     eqCheck = true; 
     longArray = [];
     workingArray = [];
@@ -169,4 +174,4 @@ equals.addEventListener('click', function (p) {
 
 
 
-    //  CE button. Second display for current operation. Key listeners. allow 2+2-3*7. text goes off display
+    //  Second display for current operation. Key listeners. allow 2+2-3*7. text goes off display
