@@ -11,120 +11,33 @@ let longArray = []
 let eqCheck = false;
 let tempString = '';
 let tempArray = [];
-const add = (a,b) => a + b;
-const subtract = (a,b) => a - b;
-const multiply = (a,b) => a * b;
-function divide(a,b) {
-    if (c === 0) {
-        return 'Don\'t do that'
-    } else {
-        return a / b;
-    }
-}
-const operate = (a,b,c) => {
-    if (b == '+') return add(a, c);
-    if (b == '-') return subtract(a, c);
-    if (b == '*') return multiply(a, c);
-    if (b == '/') return divide(a, c);
-}
-function clear() {
-    changeOp()
-    clearButton.textContent = 'AC';
-    if (workingArray.length == 0) {
-    workingArray = [];
-    display.textContent = '';
-    longArray = [];
-    args1 = '';
-    } else if (workingArray.length !== 0) {
-    workingArray = [];
-    display.textContent = '';  
-    }
-}
-function changeClear() {
-    clearButton.textContent = 'C';
-}
-function changeOp() {
-    ops.forEach(op => {
-        op.style.backgroundColor = 'rgba(255, 255, 255, 0.644)';
-        op.style.color = 'black';
-        op.style.borderColor = 'rgba(140, 251, 255, 0.658)';
-    });
-}
-function switchPositive() {
-    if (workingArray.length == 0 && eqCheck == true && args1 > 0) {
-        tempString = String(args1);
-        tempArray = tempString.split('');
-        tempArray.push('-');
-        display.textContent = tempArray.join('')
-        args1 = args1 * -1;
-    } else if (workingArray.length == 0 && eqCheck == true && args1 < 0) {
-        args1 = args1 * -1;
-        display.textContent = `${args1}`
-    } else if (workingArray.length == 0 && eqCheck == false) {
-        workingArray.push('-');
-        display.textContent = workingArray.join('')
-    } else if (workingArray[0] > 0) { //display comes in ltr, so this puts the '-' at the start.
-        workingArray.push('-');  
-        display.textContent = workingArray.join('');
-        workingArray.pop();
-        workingArray.unshift('-')
-    } else {
-        workingArray.shift();
-        display.textContent = workingArray.join('');
-    }
-}
-function displayResult() {
-    if (args1 < 0) {
-        tempString = String(args1);
-        tempArray = tempString.split('')
-        tempArray.shift()
-        tempArray.push('-')
-        display.textContent = tempArray.join('');
-    } else {
-        display.textContent = args1;
-    } 
-}
-function displayArray() {
-    if (workingArray[0] >= 0) {
-        display.textContent = workingArray.join('');
-    } else if (workingArray[0] == '-') {
-        tempArray = [...workingArray];
-        tempArray.shift()
-        tempArray.push('-')
-        display.textContent = tempArray.join('');
-    } 
-    if (workingArray.length > 17) {
-        workingArray = workingArray.slice(0,17)
-    }
-}
-function displayDecimal() {
-    tempArray = [...workingArray];
-    tempArray.pop()
-    tempArray.unshift('.')
-    display.textContent = tempArray.join('');
-    }
-clearButton.addEventListener('click', clear); 
-switcher.addEventListener('click', switchPositive)
+
 numbers.forEach(number => {
-    number.addEventListener('click', function (y) {
-        workingArray.push(this.value)
-        longArray.push(this.value);
-        displayArray();
-        changeClear();
-        changeOp();
-        if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
-            args1 = '';
-            eqCheck = false;
-        }
-        if (y.target.value == '.') {
-            console.log('hello')
-            displayDecimal();
-        }
-    });
+    number.addEventListener('click', numberPressed)   
 });  
 ops.forEach(op => {
-    op.addEventListener('click', function (o) {
-        this.style.backgroundColor = '#737373'
+    op.addEventListener('click', operatorPressed)      
+});
+equals.addEventListener('click', equalsPressed);
+switcher.addEventListener('click', switchPositive);
+clearButton.addEventListener('click', clear); 
+
+function numberPressed(e) {
+    workingArray.push(this.value)
+    longArray.push(this.value);
+    displayArray();
+    changeClear();
+    changeOp();
+    if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
+        args1 = '';
+        eqCheck = false;
+    }
+    if (this.value == '.') {
+        displayDecimal();
+    }
+}
+function operatorPressed(e) {
+    this.style.backgroundColor = '#737373'
         this.style.borderColor = '#737373'
         this.style.color = 'white'
         longArray.push(this.value)
@@ -150,28 +63,118 @@ ops.forEach(op => {
             b = firstOp;
             c = Number(workingArray.slice(0, this.index).join(''));
             args1 = operate(a,b,c)
-            args1.toFixed(3);
             firstOp = this.value // assigns the operator for next operation. 
             workingArray = [];
             displayResult();
             } 
-    })
-})
-equals.addEventListener('click', function (p) {
+    }
+function equalsPressed(e) {
     a = Number(args1);
     b = firstOp;
     c = Number(workingArray.slice(0, this.index).join(''));
     args1 = operate(a,b,c);
-    args1.toFixed(3);
     eqCheck = true; 
     longArray = [];
     workingArray = [];
     clearButton.textContent = 'AC'
     changeOp();
     displayResult()
-})
+}
+function switchPositive() {
+    if (workingArray.length == 0 && eqCheck == true && args1 > 0) {
+        tempString = String(args1);
+        tempArray = tempString.split('');
+        tempArray.push('-');
+        display.textContent = tempArray.join('')
+        args1 = args1 * -1;
+    } else if (workingArray.length == 0 && eqCheck == true && args1 < 0) {
+        args1 = args1 * -1;
+        display.textContent = `${args1}`
+    } else if (workingArray.length == 0 && eqCheck == false) {
+        workingArray.push('-');
+        display.textContent = workingArray.join('')
+    } else if (workingArray[0] > 0) { //display comes in ltr, so this puts the '-' at the start.
+        workingArray.push('-');  
+        display.textContent = workingArray.join('');
+        workingArray.pop();
+        workingArray.unshift('-')
+    } else {
+        workingArray.shift();
+        display.textContent = workingArray.join('');
+    }
+}
+function clear() {
+    changeOp()
+    clearButton.textContent = 'AC';
+    if (workingArray.length == 0) {
+    workingArray = [];
+    display.textContent = '';
+    longArray = [];
+    args1 = '';
+    } else if (workingArray.length !== 0) {
+    workingArray = [];
+    display.textContent = '';  
+    }
+}
+function changeClear() {
+    clearButton.textContent = 'C';
+}
+function changeOp() {
+    ops.forEach(op => {
+        op.style.backgroundColor = 'rgba(255, 255, 255, 0.644)';
+        op.style.color = 'black';
+        op.style.borderColor = 'rgba(140, 251, 255, 0.658)';
+    });
+}
+function displayResult() {
+    if (args1 < 0) {
+        tempString = String(args1);
+        tempArray = tempString.split('');
+        tempArray.shift();
+        tempArray.push('-');
+        display.textContent = tempArray.join('');
+    } else {
+        args1 = args1.toFixed(3);
+        display.textContent = args1;
+    } 
+}
+function displayArray() {
+    if (workingArray[0] >= 0) {
+        display.textContent = workingArray.join('');
+    } else if (workingArray[0] == '-') {
+        tempArray = [...workingArray];
+        tempArray.shift()
+        tempArray.push('-')
+        display.textContent = tempArray.join('')
+    } 
+    if (workingArray.length > 17) {
+        workingArray = workingArray.slice(0,17)
+    }
+}
+function displayDecimal() {
+    tempArray = [...workingArray];
+    tempArray.pop()
+    tempArray.unshift('.')
+    display.textContent = tempArray.join('');
+    }
+function operate(a,b,c) {
+    if (b == '+') return add(a, c);
+    if (b == '-') return subtract(a, c);
+    if (b == '*') return multiply(a, c);
+    if (b == '/') return divide(a, c);
+}
+const add = (a,b) => a + b;
+const subtract = (a,b) => a - b;
+const multiply = (a,b) => a * b;
+function divide(a,b) {
+    if (c === 0) {
+        return 'Don\'t do that'
+    } else {
+        return a / b;
+    }
+}
 
 
 
 
-    //  Second display for current operation. Key listeners. allow 2+2-3*7. text goes off display
+    //  Second display for current operation. Key listeners. allow 2+2-3*7.
