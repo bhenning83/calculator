@@ -380,10 +380,10 @@
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
     'display display display display'
-    'clear clear div sub'
+    'clear clear switch div'
     'one two three mult'
-    'four five six  add'
-    'seven eight nine switch'
+    'four five six  sub'
+    'seven eight nine add'
     'dec zero equals equals';
   }
   #footer {
@@ -452,18 +452,21 @@
     grid-area: equals;
     width: 170px;
     border-radius: 15px;
+    background-color: rgba(255, 142, 140, 0.658);
+    border: rgba(140, 251, 255, 0.658);
 }
 #clear {
     grid-area: clear;
     width: 170px;
     border-radius: 15px;
-    background-color: rgba(199, 199, 199, 0.644);
 }
 #dec {
   grid-area: dec;
 }
 #switch {
   grid-area: switch;
+  background-color: rgba(255, 199, 140, 0.658);
+  border: rgba(140, 251, 255, 0.658);
 }
 #display {
     grid-area: display;
@@ -478,4 +481,8 @@
     padding-bottom: 30px;
     padding-right: 0.3rem;
     direction: rtl
+}
+.operator {
+  background-color: rgba(255, 199, 140, 0.658);
+  border: rgba(140, 251, 255, 0.658);
 }
