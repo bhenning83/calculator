@@ -4,6 +4,10 @@ const ops = document.querySelectorAll('.operator');
 const numbers = document.querySelectorAll('.number');
 const equals = document.querySelector('#equals');
 const switcher = document.querySelector('#switch');
+const plus = document.querySelector('#add')
+const dash = document.querySelector('#subtract')
+const star = document.querySelector('#multiply')
+const slash = document.querySelector('#divide')
 let args1 = '';
 let firstOp = '';
 let workingArray = []
@@ -23,8 +27,9 @@ switcher.addEventListener('click', switchPositive);
 clearButton.addEventListener('click', clear); 
 
 function numberPressed(e) {
-    workingArray.push(this.value)
-    longArray.push(this.value);
+    if (e !== undefined) {
+        workingArray.push(this.value)
+    }
     displayArray();
     changeClear();
     changeOp();
@@ -34,40 +39,42 @@ function numberPressed(e) {
     }
     if (this.value == '.') {
         displayDecimal();
-    }
+    }  
 }
 function operatorPressed(e) {
-    this.style.backgroundColor = '#737373'
+    if (e !== undefined) {
+        this.style.backgroundColor = '#737373'
         this.style.borderColor = '#737373'
         this.style.color = 'white'
         longArray.push(this.value)
-        eqCheck = false;
-        changeClear()
-        let opCount = longArray.reduce((mode, val) => {
-            if (val == '+' || val == '-' || val == '/' || val == '*') {
-                mode += 1
-            }
-            return mode;
-        },0);
-        if (opCount == 1 && args1 == []) { // checks to make sure there isn't an args1 assigned from equals button being hit previously
-            args1 = workingArray.slice(0, this.index).join('')
-            firstOp = this.value; 
-            workingArray = [];
-        } 
-        if (opCount == 1) { // runs if there is already an args1 from previous operation
-            firstOp = this.value;
-            workingArray = [];
-        }
-        if (opCount > 1) { 
-            a = Number(args1);
-            b = firstOp;
-            c = Number(workingArray.slice(0, this.index).join(''));
-            args1 = operate(a,b,c)
-            firstOp = this.value // assigns the operator for next operation. 
-            workingArray = [];
-            displayResult();
-            } 
     }
+    eqCheck = false;
+    changeClear()
+    let opCount = longArray.reduce((mode, val) => {
+        if (val == '+' || val == '-' || val == '/' || val == '*') {
+            mode += 1
+        }
+        return mode;
+    },0);
+     if (opCount == 1 && args1 == []) { // checks to make sure there isn't an args1 assigned from equals button being hit previously
+        args1 = workingArray.slice(0, this.index).join('')
+        firstOp = this.value; 
+        workingArray = [];
+    } 
+    if (opCount == 1) { // runs if there is already an args1 from previous operation
+        firstOp = this.value;
+        workingArray = [];
+    }
+    if (opCount > 1) { 
+        a = Number(args1);
+        b = firstOp;
+        c = Number(workingArray.slice(0, this.index).join(''));
+        args1 = operate(a,b,c)
+        firstOp = this.value // assigns the operator for next operation. 
+        workingArray = [];
+        displayResult();
+        } 
+}
 function equalsPressed(e) {
     a = Number(args1);
     b = firstOp;
@@ -134,7 +141,6 @@ function displayResult() {
         tempArray.push('-');
         display.textContent = tempArray.join('');
     } else {
-        args1 = args1.toFixed(3);
         display.textContent = args1;
     } 
 }
@@ -146,17 +152,26 @@ function displayArray() {
         tempArray.shift()
         tempArray.push('-')
         display.textContent = tempArray.join('')
-    } 
+    }
     if (workingArray.length > 17) {
         workingArray = workingArray.slice(0,17)
     }
 }
 function displayDecimal() {
-    tempArray = [...workingArray];
-    tempArray.pop()
-    tempArray.unshift('.')
-    display.textContent = tempArray.join('');
+    if (workingArray[0] == '.') {
+        workingArray[0] = '0';
+        workingArray[1] = '.';
+        tempArray = [...workingArray];
+        tempArray.pop();    
+        tempArray.unshift('.')
+        display.textContent = tempArray.join('');
+    } else {
+        tempArray = [...workingArray];
+        tempArray.pop();    
+        tempArray.unshift('.')
+        display.textContent = tempArray.join('');
     }
+}
 function operate(a,b,c) {
     if (b == '+') return add(a, c);
     if (b == '-') return subtract(a, c);
@@ -173,8 +188,79 @@ function divide(a,b) {
         return a / b;
     }
 }
+window.addEventListener('keydown', (e) => {
+    switch (`${e.key}`) {
+        case 'c':
+        clear();
+        break;
+
+        case 'Enter':
+        equalsPressed();
+        break;
+
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '0':
+        workingArray.push(`${e.key}`)
+        numberPressed();
+        break;
+
+        case '.':
+        numberPressed();
+        workingArray.push(`${e.key}`);
+        displayDecimal();
+        break;
+
+        case '+':
+        plus.style.backgroundColor = '#737373'
+        plus.style.borderColor = '#737373'
+        plus.style.color = 'white'
+        longArray.push(`${e.key}`)
+        operatorPressed();
+        firstOp = `${e.key}`
+        break;
+
+        case '-':
+        dash.style.backgroundColor = '#737373'
+        dash.style.borderColor = '#737373'
+        dash.style.color = 'white'
+        longArray.push(`${e.key}`)
+        operatorPressed();
+        firstOp = `${e.key}`
+        break;
+
+        case '*':
+        star.style.backgroundColor = '#737373'
+        star.style.borderColor = '#737373'
+        star.style.color = 'white'
+        longArray.push(`${e.key}`)
+        operatorPressed();
+        firstOp = `${e.key}`
+        break;
+
+        case '/':
+        slash.style.backgroundColor = '#737373'
+        slash.style.borderColor = '#737373'
+        slash.style.color = 'white'
+        longArray.push(`${e.key}`)
+        operatorPressed();
+        firstOp = `${e.key}`
+        break; 
+
+        case '_':
+        switchPositive();
+        break;
+    }
+    });
 
 
 
-
-    //  Second display for current operation. Key listeners. allow 2+2-3*7.
+    //  Second display for current operation. allow 2+2-3*7.
+    // buttons flash color when pressed
