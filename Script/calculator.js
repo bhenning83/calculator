@@ -144,14 +144,14 @@ function displayResult() {
         display.textContent = args1;
     } 
 }
-function displayArray() {
-    if (workingArray[0] >= 0) {
-        display.textContent = workingArray.join('');
-    } else if (workingArray[0] == '-') {
+function displayArray(e) {
+    if (workingArray[0] == '-') {
         tempArray = [...workingArray];
         tempArray.shift()
         tempArray.push('-')
         display.textContent = tempArray.join('')
+    } else if (workingArray[0] >= 0) {
+        display.textContent = workingArray.join('');
     }
     if (workingArray.length > 17) {
         workingArray = workingArray.slice(0,17)
@@ -256,6 +256,18 @@ window.addEventListener('keydown', (e) => {
 
         case '_':
         switchPositive();
+        break;
+
+        case 'Backspace':
+        workingArray.pop();
+        if (workingArray.length == 0) {
+            display.textContent = '';
+        }
+        if (workingArray.slice(-1) == '.') {
+            displayDecimal()
+        } else {
+            displayArray();   
+        }
         break;
 
         case 'k':
