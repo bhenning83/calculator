@@ -32,7 +32,7 @@ function numberPressed(e) {
     }
     displayArray();
     changeClear();
-    changeOp();
+    resetOpColor();
     if (eqCheck == true) { // erases args1 from previous operation if a fresh operation is being started
         args1 = '';
         eqCheck = false;
@@ -84,7 +84,7 @@ function equalsPressed(e) {
     longArray = [];
     workingArray = [];
     clearButton.textContent = 'AC'
-    changeOp();
+    resetOpColor();
     displayResult()
 }
 function switchPositive() {
@@ -111,7 +111,7 @@ function switchPositive() {
     }
 }
 function clear() {
-    changeOp()
+    resetOpColor()
     clearButton.textContent = 'AC';
     if (workingArray.length == 0) {
     workingArray = [];
@@ -126,9 +126,9 @@ function clear() {
 function changeClear() {
     clearButton.textContent = 'C';
 }
-function changeOp() {
+function resetOpColor() {
     ops.forEach(op => {
-        op.style.backgroundColor = 'rgba(255, 255, 255, 0.644)';
+        op.style.backgroundColor = 'rgba(255, 199, 140, 0.658)';
         op.style.color = 'black';
         op.style.borderColor = 'rgba(140, 251, 255, 0.658)';
     });
