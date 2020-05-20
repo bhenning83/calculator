@@ -189,6 +189,7 @@ function divide(a,b) {
     }
 }
 window.addEventListener('keydown', (e) => {
+    console.log(e);
     switch (`${e.key}`) {
         case 'c':
         clear();
