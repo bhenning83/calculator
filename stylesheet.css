@@ -474,7 +474,7 @@
     grid-area: display;
     border-radius: 5px;
     font-size: 45px;
-    font-family: sans-serif;
+    font-family: Quantico, sans-serif;
     background-color: lightgray;
     margin-bottom: 1.5rem;
     width: 385px;
@@ -482,7 +482,8 @@
     padding-top: 20px;
     padding-bottom: 30px;
     padding-right: 0.3rem;
-    direction: rtl
+    direction: rtl;
+    overflow: hidden;
 }
 .operator {
   background-color: rgba(255, 199, 140, 0.658);

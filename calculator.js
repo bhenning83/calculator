@@ -141,6 +141,7 @@ function displayResult() {
         tempArray.push('-');
         display.textContent = tempArray.join('');
     } else {
+        args1 = args1.toFixed(3);
         display.textContent = args1;
     } 
 }
@@ -153,8 +154,8 @@ function displayArray(e) {
     } else if (workingArray[0] >= 0) {
         display.textContent = workingArray.join('');
     }
-    if (workingArray.length > 17) {
-        workingArray = workingArray.slice(0,17)
+    if (workingArray.length > 13) {
+        workingArray = workingArray.slice(0,13)
     }
 }
 function displayDecimal() {
@@ -182,11 +183,8 @@ const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a * b;
 function divide(a,b) {
-    if (c === 0) {
-        return 'Don\'t do that'
-    } else {
-        return a / b;
-    }
+    if (c === 0) return 'Don\'t do that';
+    return a / b;
 }
 window.addEventListener('keydown', (e) => {
     switch (`${e.key}`) {
